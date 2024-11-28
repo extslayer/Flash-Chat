@@ -22,10 +22,13 @@ class LoginViewController: UIViewController {
             Auth.auth().signIn(withEmail: email, password: password) {authResult, error in
                 if let Error = error {
                     print(Error.localizedDescription)
+                    let alert = UIAlertController(title: "Could not login", message: Error.localizedDescription, preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                     
                 }
                 else{
-                    self.performSegue(withIdentifier: "LoginToChat", sender: self)
+                    self.performSegue(withIdentifier: K.loginSegue, sender: self)
                 }
               // ...
             }
